@@ -12,7 +12,7 @@ export default class JobSeekerService{
         return axios.get(`${this.urlBase}/getAllCv`)
     }
 
-    add({firstName,lastName,nationalityId,email,password,yearOfBirth,jobId}){
+    add(firstName,lastName,nationalityId,email,password,yearOfBirth,jobId){
 
         return axios.post(`${this.urlBase}/add`, {
 

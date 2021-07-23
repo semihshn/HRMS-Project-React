@@ -1,4 +1,5 @@
 import axios from "axios"
+import { toast } from "react-toastify";
 
 export default class EmployerService{
 
@@ -8,7 +9,7 @@ export default class EmployerService{
         return axios.get(`${this.urlBase}/getall`)
     }
 
-    add({companyName,telephone,email,password,webSite}){
+    add(companyName,telephone,email,password,webSite){
 
         return axios.post(`${this.urlBase}/add`, {
           
@@ -23,6 +24,7 @@ export default class EmployerService{
           })
           .then(function (response) {
             console.log(response);
+            response.data.success?toast.success(`${companyName} sisteme eklendi`):toast.error(response.data.message)
           })
           .catch(function (error) {
             console.log(error);

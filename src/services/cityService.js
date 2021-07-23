@@ -8,7 +8,7 @@ export default class CityService{
         return axios.get(`${this.urlBase}/getall`)
     }
 
-    add({cityName}){
+    add(cityName){
 
         return axios.post(`${this.urlBase}/add`, {
             name: cityName
