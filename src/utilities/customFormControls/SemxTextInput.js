@@ -7,8 +7,9 @@ export default function SemxTextInput({...props}) {
 
     return (
         <div>
-            <FormField error={meta.touched && !!meta.error}>
-                <input {...field} {...props} />
+            <FormField style={{marginTop:"15px"}} error={meta.touched && !!meta.error}>
+                {props.type==="number"?props.itemlabel?<label style={{float:"left"}} ><b>{props.itemlabel}</b></label>:null:null}
+                <input style={{borderColor:"black"}} placeholder={props.itemlabel?props.itemlabel:null} {...field} {...props} />
                 {meta.touched && !!meta.error ? (
                     <Label pointing basic color="red" content={meta.error}></Label>
                 ):null}

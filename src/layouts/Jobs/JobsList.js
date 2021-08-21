@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Icon, Menu, Table } from "semantic-ui-react";
-import CityService from "../services/cityService";
+import JobService from "../../services/jobService";
 
-export default function CitiesList() {
 
-  const [cities, setCities] = useState([]);
+export default function JobsList() {
+  const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
-    let cityService = new CityService();
-    cityService.getAllCities().then((result) => setCities(result.data.data));
+    let jobService = new JobService();
+    jobService.getAllJobs().then((result) => setJobs(result.data.data));
   });
 
   return (
@@ -16,14 +16,14 @@ export default function CitiesList() {
       <Table celled>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Şehir İsmi</Table.HeaderCell>
+            <Table.HeaderCell>Meslek</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
         <Table.Body>
-          {cities.map((city) => (
+          {jobs.map((job) => (
             <Table.Row>
-              <Table.Cell>{city.name}</Table.Cell>
+              <Table.Cell>{job.jobName}</Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

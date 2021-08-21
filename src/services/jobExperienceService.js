@@ -1,4 +1,5 @@
 import axios from "axios"
+import { toast } from "react-toastify";
 
 export default class JobExperienceService{
 
@@ -8,7 +9,7 @@ export default class JobExperienceService{
         return axios.get(`${this.urlBase}/getall`)
     }
 
-    add({companyName,experienceStartDate,experienceEndDate,jobId,jobSeekerId}){
+    add(companyName,experienceStartDate,experienceEndDate,jobId,jobSeekerId){
 
         return axios.post(`${this.urlBase}/add`, {
 
@@ -21,9 +22,11 @@ export default class JobExperienceService{
           })
           .then(function (response) {
             console.log(response);
+            response.data.success?toast.success(response.data.message):toast.error(response.data.message)
           })
           .catch(function (error) {
             console.log(error);
+            toast.info("İstenmeyen bir hatayla karşılaşıldı")
           });
 
         }

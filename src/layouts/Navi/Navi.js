@@ -22,7 +22,7 @@ export default function Navi() {
         <div>
             <Menu inverted fixed="top">
                 <Container>
-                <Menu.Item as={NavLink} to="/home" name="home" />
+                <Menu.Item as={NavLink} to="/" name="home" />
           <Menu.Item as={NavLink} to="/messages" name="messages" />
 
                     <Menu.Menu position='right'>

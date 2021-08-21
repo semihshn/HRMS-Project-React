@@ -1,4 +1,5 @@
 import axios from "axios"
+import { toast } from "react-toastify";
 
 export default class CityService{
 
@@ -15,14 +16,16 @@ export default class CityService{
           })
           .then(function (response) {
             console.log(response);
+            response.data.success?toast.success(response.data.message):toast.error(response.data.message)
           })
           .catch(function (error) {
             console.log(error);
+            toast.info("İstenmeyen bir hatayla karşılaşıldı")
           });
 
     }
 
-    update({cityId,cityName}){
+    update(cityId,cityName){
 
       axios.put(`${this.urlBase}/update` , {
         id:cityId,
@@ -30,23 +33,27 @@ export default class CityService{
       })
       .then(function (response) {
         console.log(response);
+        response.data.success?toast.success(response.data.message):toast.error(response.data.message)
       })
       .catch(function (error) {
         console.log(error);
+        toast.info("İstenmeyen bir hatayla karşılaşıldı")
       });
 
     }
 
-    delete({cityId}){
+    delete(cityId){
 
       axios.delete(`${this.urlBase}/delete` , {
-        id:cityId
+        params:{cityId}
       })
       .then(function (response) {
         console.log(response);
+        response.data.success?toast.success(response.data.message):toast.error(response.data.message)
       })
       .catch(function (error) {
         console.log(error);
+        toast.info("İstenmeyen bir hatayla karşılaşıldı")
       });
 
     }

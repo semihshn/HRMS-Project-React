@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { Button, FormField, Select } from "semantic-ui-react";
-import SemxTextInput from "../utilities/customFormControls/SemxTextInput";
-import JobService from "../services/jobService";
-import JobSeekerService from "../services/jobSeekerService";
+import { Button } from "semantic-ui-react";
+import SemxTextInput from "../../utilities/customFormControls/SemxTextInput";
+import SemxSelectInput from "../../utilities/customFormControls/SemxSelectInput";
+import JobSeekerService from "../../services/jobSeekerService";
+import JobService from "../../services/jobService";
 
 export default function JobSeekerRegister() {
   const [jobs, setJobs] = useState([]);
@@ -13,9 +14,6 @@ export default function JobSeekerRegister() {
     let jobService = new JobService();
     jobService.getAllJobs().then((result) => setJobs(result.data.data));
   });
-
-  const countryOptions = [{ value: "", text: "" }];
-  jobs.map((job) => countryOptions.push({ value: job.id, text: job.jobName }));
 
   const initialValues = {
     firstName: "",
@@ -63,30 +61,28 @@ export default function JobSeekerRegister() {
       initialValues={initialValues}
       validationSchema={schema}
       onSubmit={(values) => {
-          console.log(values.email)
-        // handleAddToJobSeeker(
-        //   values.firstName,
-        //   values.lastName,
-        //   values.nationalityId,
-        //   values.email,
-        //   values.yearOfBirth,
-        //   values.jobId
-        // );
+          //console.log(values.jobId)
+        handleAddToJobSeeker(
+          values.firstName,
+          values.lastName,
+          values.nationalityId,
+          values.email,
+          values.password,
+          values.yearOfBirth,
+          values.jobId
+        );
       }}
     >
       <Form className="ui form">
-        <SemxTextInput name="firstName" placeholder="İsim" />
+        <SemxTextInput name="firstName" placeholder="İsim"/>
         <SemxTextInput name="lastName" placeholder="Soyisim" />
         <SemxTextInput name="nationalityId" placeholder="TC" />
         <SemxTextInput name="email" placeholder="e-mail" />
+        <SemxTextInput name="password" placeholder="password" type="password"/>
         <SemxTextInput name="yearOfBirth" placeholder="doğum yılı" />
-        <FormField>
-          <Select
-            
-            placeholder="Select your job"
-            options={countryOptions}
-          />
-        </FormField>
+
+        <SemxSelectInput name="jobId" items={jobs} itemKey="jobName"></SemxSelectInput>
+        
 
         <Button color="green" type="submit">
           Submit

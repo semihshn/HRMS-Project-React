@@ -1,4 +1,5 @@
 import axios from "axios"
+import { toast } from "react-toastify";
 
 export default class SchoolService{
 
@@ -8,7 +9,7 @@ export default class SchoolService{
         return axios.get(`${this.urlBase}/getall`)
     }
 
-    add({schoolName}){
+    add(schoolName){
 
         return axios.post(`${this.urlBase}/add`, {
 
@@ -17,9 +18,11 @@ export default class SchoolService{
           })
           .then(function (response) {
             console.log(response);
+            response.data.success?toast.success(response.data.message):toast.error(response.data.message)
           })
           .catch(function (error) {
             console.log(error);
+            toast.info("İstenmeyen bir hatayla karşılaşıldı")
           });
 
     }

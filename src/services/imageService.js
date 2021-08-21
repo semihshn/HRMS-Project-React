@@ -1,4 +1,5 @@
 import axios from "axios"
+import { toast } from "react-toastify";
 
 export default class ImageService{
 
@@ -8,7 +9,7 @@ export default class ImageService{
         return axios.get(`${this.urlBase}/getall`)
     }
 
-    add({imageFile,jobseekerId}){
+    add(imageFile,jobseekerId){
 
         const data = new FormData();
         data.append("file", imageFile);
@@ -19,9 +20,11 @@ export default class ImageService{
           })
           .then(function (response) {
             console.log(response);
+            response.data.success?toast.success(response.data.message):toast.error(response.data.message)
           })
           .catch(function (error) {
             console.log(error);
+            toast.info("İstenmeyen bir hatayla karşılaşıldı")
           });
 
     }

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default class UserService {
   urlBase = "http://localhost:8080/api/users";
@@ -7,7 +8,7 @@ export default class UserService {
     return axios.get(`${this.urlBase}/getall`);
   }
 
-  add({ email, password }) {
+  add( email, password ) {
     return axios
       .post(`${this.urlBase}/add`, {
         email: email,
@@ -15,9 +16,11 @@ export default class UserService {
       })
       .then(function (response) {
         console.log(response);
+        response.data.success?toast.success(response.data.message):toast.error(response.data.message)
       })
       .catch(function (error) {
         console.log(error);
+        toast.info("İstenmeyen bir hatayla karşılaşıldı")
       });
   }
 

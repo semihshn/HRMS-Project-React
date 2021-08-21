@@ -1,4 +1,5 @@
 import axios from "axios"
+import { toast } from "react-toastify";
 
 export default class JobService{
 
@@ -8,16 +9,18 @@ export default class JobService{
         return axios.get(`${this.urlBase}/getall`)
     }
 
-    add({jobName}){
+    add(jobName){
 
         return axios.post(`${this.urlBase}/add`, {
             jobName: jobName
           })
           .then(function (response) {
             console.log(response);
+            response.data.success?toast.success(response.data.message):toast.error(response.data.message)
           })
           .catch(function (error) {
             console.log(error);
+            toast.info("İstenmeyen bir hatayla karşılaşıldı")
           });
 
     }

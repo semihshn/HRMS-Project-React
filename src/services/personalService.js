@@ -1,4 +1,5 @@
 import axios from "axios"
+import { toast } from "react-toastify";
 
 export default class PersonalService{
 
@@ -8,7 +9,7 @@ export default class PersonalService{
         return axios.get(`${this.urlBase}/getall`)
     }
 
-    add({firstName,lastName,email,password}){
+    add(firstName,lastName,email,password){
 
         return axios.post(`${this.urlBase}/add`, {
             firstName: firstName,
@@ -20,9 +21,11 @@ export default class PersonalService{
           })
           .then(function (response) {
             console.log(response);
+            response.data.success?toast.success(response.data.message):toast.error(response.data.message)
           })
           .catch(function (error) {
             console.log(error);
+            toast.info("İstenmeyen bir hatayla karşılaşıldı")
           });
 
     }

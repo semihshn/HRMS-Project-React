@@ -1,4 +1,5 @@
 import axios from "axios"
+import { toast } from "react-toastify";
 
 export default class KnownLanguageService{
 
@@ -8,7 +9,7 @@ export default class KnownLanguageService{
         return axios.get(`${this.urlBase}/getall`)
     }
 
-    add({jobSeekerId,languageId,level}){
+    add(jobSeekerId,languageId,level){
 
         return axios.post(`${this.urlBase}/add`, {
 
@@ -23,9 +24,11 @@ export default class KnownLanguageService{
           })
           .then(function (response) {
             console.log(response);
+            response.data.success?toast.success(response.data.message):toast.error(response.data.message)
           })
           .catch(function (error) {
             console.log(error);
+            toast.info("İstenmeyen bir hatayla karşılaşıldı")
           });
 
     }

@@ -1,15 +1,18 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { Container, Grid } from "semantic-ui-react";
-import CitiesList from "./CitiesList";
-import JobSeekersList from "./JobSeekersList";
-import JobsList from "./JobsList";
-import Navi from "./Navi";
-import JobAdvertList from "./JobAdvertList";
-import CityAdd from "./CityAdd";
+import CitiesList from "./Cities/CitiesList";
+import JobSeekersList from "./JobSeekers/JobSeekersList";
+import JobsList from "./Jobs/JobsList";
+import Navi from "./Navi/Navi";
+import JobAdvertList from "./JobAdverts/JobAdvertList";
+import CityAdd from "./Cities/CityAdd";
 import { ToastContainer } from "react-toastify";
-import EmployerRegister from "./EmployerRegister";
-import JobSeekerRegister from "./JobSeekerRegister";
+import EmployerRegister from "./Register/EmployerRegister";
+import JobSeekerRegister from "./Register/JobSeekerRegister";
+import JobAdvertAdd from "./JobAdverts/JobAdvertAdd";
+import JobAdvertListByPendingApproval from "./JobAdverts/JobAdvertListByPendingApproval";
+import EmployerList from "./Employer/EmployerList";
 
 export default function Dashboard() {
   return (
@@ -23,10 +26,13 @@ export default function Dashboard() {
               <Route exact path="/" component={JobAdvertList} />
               <Route exact path="/city/getall" component={CitiesList} />
               <Route exact path="/city/add" component={CityAdd} />
-              <Route path="/jobseekers" component={JobSeekersList} />
-              <Route path="/jobs" component={JobsList} />
+              <Route path="/jobseeker/getall" component={JobSeekersList} />
+              <Route path="/job/getall" component={JobsList} />
+              <Route exact path="/employer/getall" component={EmployerList} />
               <Route exact path="/register/employer" component={EmployerRegister} />
               <Route exact path="/register/jobseeker" component={JobSeekerRegister} />
+              <Route exact path="/jobadvert/add" component={JobAdvertAdd} />
+              <Route exact path="/admin/jobadvert/pending" component={JobAdvertListByPendingApproval} />
               
           </Grid.Column>
           </Grid.Row>

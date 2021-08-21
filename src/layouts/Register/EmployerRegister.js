@@ -2,8 +2,8 @@ import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { Button } from "semantic-ui-react";
-import SemxTextInput from "../utilities/customFormControls/SemxTextInput";
-import EmployerService from "../services/employerService";
+import SemxTextInput from "../../utilities/customFormControls/SemxTextInput";
+import EmployerService from "../../services/employerService";
 
 export default function EmployerRegister() {
   const initialValues = {
@@ -22,7 +22,7 @@ export default function EmployerRegister() {
     webSite: Yup.string().required("Lütfen website bilginizi giriniz"),
   });
 
-  const handleAddToCity = (
+  const handleAddToEmployer = (
     companyName,
     telephone,
     email,
@@ -39,7 +39,8 @@ export default function EmployerRegister() {
       initialValues={initialValues}
       validationSchema={schema}
       onSubmit={(values) => {
-        handleAddToCity(
+        console.log(values)
+        handleAddToEmployer(
           values.companyName,
           values.telephone,
           values.email,

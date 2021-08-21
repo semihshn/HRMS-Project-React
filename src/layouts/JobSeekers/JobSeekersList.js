@@ -1,19 +1,48 @@
 import React, { useState, useEffect } from "react";
-import { Icon, Menu, Table } from "semantic-ui-react";
-import JobSeekerService from "../services/jobSeekerService";
+import { Card, Image, Label } from "semantic-ui-react";
+import JobSeekerService from "../../services/jobSeekerService";
 
 export default function JobSeekersList() {
-
   const [jobSeekers, setJobSeekers] = useState([]);
 
   useEffect(() => {
     let jobSeekerService = new JobSeekerService();
-    jobSeekerService.getAllJobSeekers().then((result) => setJobSeekers(result.data.data));
+    jobSeekerService
+      .getAllJobSeekers()
+      .then((result) => setJobSeekers(result.data.data));
   });
 
   return (
     <div>
-      <Table celled>
+      <Card.Group>
+        {jobSeekers.map((jobSeeker) => (
+          <Card fluid>
+            <Card.Content>
+              <Image
+                floated="left"
+                size="tiny"
+                src="https://react.semantic-ui.com/images/avatar/large/steve.jpg"
+                circular
+              />
+              <Card.Header>{`${jobSeeker.firstName} ${jobSeeker.lastName}`}</Card.Header>
+              <Card.Meta>{jobSeeker.job.jobName}</Card.Meta>
+              <Card.Meta>
+                <Label as="b" tag>
+                TC : <strong>{jobSeeker.nationalityId}</strong>
+                </Label>
+                <Label as="b" color="red" tag>
+                E-mail : <strong>{jobSeeker.user.email}</strong>
+                </Label>
+                <Label as="b" color="teal" tag>
+                Doğum Tarihi : <strong>{jobSeeker.yearOfBirth}</strong>
+                </Label>
+              </Card.Meta>
+            </Card.Content>
+          </Card>
+        ))}
+      </Card.Group>
+
+      {/* <Table celled>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>İsim</Table.HeaderCell>
@@ -56,7 +85,7 @@ export default function JobSeekersList() {
             </Table.HeaderCell>
           </Table.Row>
         </Table.Footer>
-      </Table>
+      </Table> */}
     </div>
   );
 }

@@ -2,8 +2,8 @@ import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { Button } from "semantic-ui-react";
-import SemxTextInput from "../utilities/customFormControls/SemxTextInput";
-import CityService from "../services/cityService";
+import SemxTextInput from "../../utilities/customFormControls/SemxTextInput";
+import CityService from "../../services/cityService";
 import { toast } from "react-toastify";
 
 

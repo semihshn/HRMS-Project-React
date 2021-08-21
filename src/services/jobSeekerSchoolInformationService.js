@@ -1,4 +1,5 @@
 import axios from "axios"
+import { toast } from "react-toastify";
 
 export default class JobSeekerSchoolInformationService{
 
@@ -8,7 +9,7 @@ export default class JobSeekerSchoolInformationService{
         return axios.get(`${this.urlBase}/getall`)
     }
 
-    add({jobSeekerId,schoolId,schoolPartId,universityStartDate,universityGraduationDate}){
+    add(jobSeekerId,schoolId,schoolPartId,universityStartDate,universityGraduationDate){
 
         return axios.post(`${this.urlBase}/add`, {
 
@@ -27,9 +28,11 @@ export default class JobSeekerSchoolInformationService{
           })
           .then(function (response) {
             console.log(response);
+            response.data.success?toast.success(response.data.message):toast.error(response.data.message)
           })
           .catch(function (error) {
             console.log(error);
+            toast.info("İstenmeyen bir hatayla karşılaşıldı")
           });
 
     }
