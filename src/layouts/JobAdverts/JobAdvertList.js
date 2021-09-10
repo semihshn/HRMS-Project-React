@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Button,
   Card,
@@ -9,22 +10,28 @@ import {
   Statistic,
 } from "semantic-ui-react";
 import JobAdvertService from "../../services/jobAdvertService";
+//import { getAllJobAdvert, getAllJobAdvertsByIsActive } from "../../store/actions/jobAdvertActions";
+import { getAllJobAdvert, getAllJobAdvertsByIsActive } from "../../toolkit/features/jobAdvertSlice";
+import { useAppSelector } from "../../toolkit/store";
 
 export default function JobAdvertList() {
-  const [jobAdverts, setJobAdverts] = useState([]);
+  //const storeJobAdverts = useSelector(state => state.jobAdverts.jobAdverts.data)
+  const toolkitJobAdvert = useAppSelector(state=>state.jobAdvert)
+  const dispatch=useDispatch()
+  //const [jobAdverts, setJobAdverts] = useState([]);
 
-  useEffect(() => {
-    let jobAdvertService = new JobAdvertService();
-    jobAdvertService
-      .getAllJobAdvertsByIsActive(true)
-      .then((result) => setJobAdverts(result.data.data));
-  });
-
+   useEffect(() => {
+    // let jobAdvertService = new JobAdvertService();
+    // jobAdvertService
+    //   .getAllJobAdvertsByIsActive(true)
+    //   .then((result) => setJobAdverts(result.data.data));
+    dispatch(getAllJobAdvertsByIsActive(true))
+   },[]);
   return (
     <Container>
       <Grid>
         <Grid.Row>
-          {jobAdverts.map((jobAdvert) => (
+          {toolkitJobAdvert.data && toolkitJobAdvert.data.data.map((jobAdvert) => (
             <Grid.Column width={8}>
               <Card.Group className="centered">
                 <Card key={jobAdvert.id} style={{ marginTop: "3em" }}>

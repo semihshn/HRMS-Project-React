@@ -16,7 +16,7 @@ export default function SignedOut({ signIn }) {
   return (
     <div>
       <Menu.Item>
-        <Button onClick={signIn} primary>
+        <Button as={NavLink} to="/login" primary>
           Giriş Yap
         </Button>
         <Modal
@@ -24,7 +24,12 @@ export default function SignedOut({ signIn }) {
           onOpen={() => setOpen(true)}
           open={open}
           trigger={
-            <Button primary style={{ marginLeft: "0.5em" }}>
+            <Button
+              as={NavLink}
+              to="/register/jobseeker"
+              primary
+              style={{ marginLeft: "0.5em" }}
+            >
               Kayıt Ol
             </Button>
           }

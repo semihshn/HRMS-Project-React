@@ -1,21 +1,31 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { Container, Menu } from 'semantic-ui-react'
 import SignedOut from './SignedOut'
 import SignedIn from './SignedIn'
 import { NavLink, useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAuthenticate } from '../../store/actions/authenticateActions'
 
 export default function Navi() {
 
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const isAuthenticate = useSelector(state => state.isAuthenticate)
+    const dispatch = useDispatch()
+
+    const [isAuthenticated, setIsAuthenticated] = useState(true)
     const history=useHistory();
 
+    useEffect(() => {
+        isAuthenticate?setIsAuthenticated(true):setIsAuthenticated(false);
+      },[isAuthenticate]);
+    
+
     function handleSignOut() {
-        setIsAuthenticated(false);
+        dispatch(setAuthenticate(false))
         history.push("/")
     }
 
     function handleSignIn() {
-        setIsAuthenticated(true);
+        dispatch(setAuthenticate(true))
     }
 
     return (

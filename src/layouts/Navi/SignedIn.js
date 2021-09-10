@@ -1,7 +1,8 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { Dropdown, Image, Menu } from "semantic-ui-react";
 
-export default function SignedIn({signOut}) {
+export default function SignedIn({ signOut }) {
   return (
     <div>
       <Menu.Item>
@@ -12,8 +13,13 @@ export default function SignedIn({signOut}) {
         ></Image>
         <Dropdown pointing="top right" text="Semih">
           <Dropdown.Menu>
-            <Dropdown.Item text="Bilgilerim" icon="info"/>
-            <Dropdown.Item onClick={signOut} text="Çıkış Yap" icon="sign-out"/>
+            <Dropdown.Item
+              as={NavLink}
+              to="/user/info"
+              text="Bilgilerim"
+              icon="info"
+            />
+            <Dropdown.Item onClick={signOut} text="Çıkış Yap" icon="sign-out" />
           </Dropdown.Menu>
         </Dropdown>
       </Menu.Item>

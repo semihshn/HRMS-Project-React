@@ -13,6 +13,8 @@ import JobSeekerRegister from "./Register/JobSeekerRegister";
 import JobAdvertAdd from "./JobAdverts/JobAdvertAdd";
 import JobAdvertListByPendingApproval from "./JobAdverts/JobAdvertListByPendingApproval";
 import EmployerList from "./Employer/EmployerList";
+import Login from "../pages/Login";
+import JobSeekerInfo from "./JobSeekers/JobSeekerInfo";
 
 export default function Dashboard() {
   return (
@@ -24,6 +26,7 @@ export default function Dashboard() {
           <Grid.Row>
           <Grid.Column width={16}>
               <Route exact path="/" component={JobAdvertList} />
+              <Route exact path="/login" component={Login} />
               <Route exact path="/city/getall" component={CitiesList} />
               <Route exact path="/city/add" component={CityAdd} />
               <Route path="/jobseeker/getall" component={JobSeekersList} />
@@ -33,6 +36,7 @@ export default function Dashboard() {
               <Route exact path="/register/jobseeker" component={JobSeekerRegister} />
               <Route exact path="/jobadvert/add" component={JobAdvertAdd} />
               <Route exact path="/admin/jobadvert/pending" component={JobAdvertListByPendingApproval} />
+              <Route exact path="/user/info" component={JobSeekerInfo} />
               
           </Grid.Column>
           </Grid.Row>

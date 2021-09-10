@@ -13,6 +13,12 @@ export default class JobSeekerService{
         return axios.get(`${this.urlBase}/getAllCv`)
     }
 
+    getByUserId(jobSeekerUserId){
+      return axios.get(`${this.urlBase}/getByUserId`, {
+        params: { jobSeekerUserId: jobSeekerUserId },
+      })
+  }
+
     add(firstName,lastName,nationalityId,email,password,yearOfBirth,jobId){
 
         return axios.post(`${this.urlBase}/add`, {

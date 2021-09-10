@@ -8,11 +8,15 @@ import JobService from "../../services/jobService";
 import EmployerService from "../../services/employerService";
 import CityService from "../../services/cityService";
 import JobAdvertService from "../../services/jobAdvertService";
+import { useDispatch } from "react-redux";
+import { add } from "../../store/actions/jobAdvertActions";
 
 export default function JobAdvertAdd() {
   const [cities, setCities] = useState([]);
   const [employers, setEmployers] = useState([]);
   const [jobs, setJobs] = useState([]);
+
+  const dispatch=useDispatch()
 
   useEffect(() => {
     let cityService = new CityService();
@@ -73,9 +77,7 @@ export default function JobAdvertAdd() {
     workingType,
     workingTimeType
   ) => {
-    let jobAdvertService = new JobAdvertService();
-    jobAdvertService.add(
-      applicationDeadline,
+    dispatch(add( applicationDeadline,
       cityId,
       description,
       employerId,
@@ -84,8 +86,7 @@ export default function JobAdvertAdd() {
       minSalary,
       numberOfOpenPosition,
       workingType,
-      workingTimeType
-    );
+      workingTimeType))
   };
 
   return (
